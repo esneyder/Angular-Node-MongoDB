@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>AngularJS - NodeJS - SocketIO - MongoDB</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body ng-app="angularTareas">
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+
+        <div class="container" ng-controller="ControladorTareas">
+            <h3>LISTA DE TAREAS</h3>
+            <ul>
+                <li ng-repeat="tarea in tareas">
+                    <input type="checkbox" ng-model="tarea.hecho" ng-click="changeStatus(tarea._id)">
+                    <span>{{ tarea.texto }} <a href="#" class="eliminar-tarea" ng-click="remove(tarea._id)">[Eliminar]</a></span>
+                </li>
+            </ul>
+
+
+            <form class="form" name="formAgregar" >
+                <p class="has-error" ng-show="formAgregar.tareaTexto.$error.required">Debe completar el campo.</p>
+                <input type="text" class="input" name="tareaTexto" placeholder="Inserta una tarea nueva" ng-model="nuevaTarea" required>
+                <button class="btn" ng-click="crearTarea($event)">Añadir</button>
+            </form>
+        </div>
+        
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.21/angular.js"></script>
+        <script src="node_modules/socket.io/node_modules/socket.io-client/dist/socket.io.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
